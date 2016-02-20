@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 /*
     Writes an Image to file of the Mandelbrot set with resolution width and height
@@ -19,14 +20,37 @@ import java.io.File;
 
 public class Mandelbrot {
 
-    private static int width = 2000, height = 2000, max_iter = 1048;
-    private static int[][] matrix = new int[width][height];
-    private static double min_c_re = -1.5, min_c_im = -0.5, max_c_re = -0.5, max_c_im = 0.5;
+    private static int width = 512, height = 512, max_iter = 1024;
 
     public static void main(String[] args) {
 
-        for (int row = 0; row < height; row++) { // for each row
-            for (int col = 0; col < width; col++) { // for each column
+
+        // These variables hold information about which coordinates
+        // the image should zoom in on. Defaulting on showing the
+        // entire mandelbrot set.
+        double min_c_re = -2, min_c_im = -2, max_c_re = 2, max_c_im = 2;
+
+        // Parse command line arguments
+        try {
+            min_c_re = Double.parseDouble(args[1]);
+            min_c_im = Double.parseDouble(args[2]);
+            max_c_re = Double.parseDouble(args[3]);
+            max_c_im = Double.parseDouble(args[4]);
+            max_iter = Integer.parseInt(args[5]);
+            width = Integer.parseInt(args[6]);
+            height = Integer.parseInt(args[7]);
+        }
+        catch (NullPointerException | NumberFormatException ex) {
+            System.out.println("Arguments were not entered correctly. Using defaults.");
+        }
+        catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println("Missing arguments, expected: min_c_re min_c_im max_c_re max_c_im max_iterations width height. Using defaults.");
+        }
+
+        int[][] matrix = new int[width][height];
+
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
                 double c_re = min_c_re + col * (max_c_re - (min_c_re)) / width;
                 double c_im = min_c_im + row * (max_c_im - (min_c_im)) / height;
 
@@ -36,6 +60,7 @@ public class Mandelbrot {
             }
         }
 
+        // Save image
         try {
             BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
             File f = new File("MyFile.png");
@@ -50,8 +75,7 @@ public class Mandelbrot {
             }
             ImageIO.write(img, "PNG", f);
 
-        } catch (Exception e) {
-            System.out.println("crash");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
