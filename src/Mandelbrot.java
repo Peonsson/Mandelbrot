@@ -5,9 +5,20 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+/*
+    Writes an Image to file of the Mandelbrot set with resolution width and height
+    from min_c_re to max_c_re and min_c_im and max_c_im with max iterations max_iter.
+
+    Created 2015-02-19
+
+    Written by Peonsson and roppe546
+    https://github.com/Peonsson
+    https://github.com/roppe546
+ */
+
 public class Mandelbrot {
 
-    private static int width = 2000, height = 2000, max_n = 1048;
+    private static int width = 2000, height = 2000, max_iter = 1048;
     private static int[][] matrix = new int[width][height];
     private static double min_c_re = -1.5, min_c_im = -0.5, max_c_re = -0.5, max_c_im = 0.5;
 
@@ -20,7 +31,7 @@ public class Mandelbrot {
 
                 Complex c = new Complex(c_re, c_im);
 
-                matrix[row][col] = (max_n - compute(c)) % 256;
+                matrix[row][col] = (max_iter - compute(c)) % 256;
             }
         }
 
@@ -51,12 +62,12 @@ public class Mandelbrot {
 
         Complex c = new Complex(real, imaginary);
 
-        for (int m = 0; m < max_n; m++) { // for each pixel
+        for (int m = 0; m < max_iter; m++) { // for each pixel
             if (z.abs() > 2.0) {
                 return m;
             }
             z = z.multiply(z).add(c);
         }
-        return max_n;
+        return max_iter;
     }
 }
