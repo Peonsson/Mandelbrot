@@ -35,13 +35,13 @@ public class Mandelbrot {
 
         // Parse command line arguments
         try {
-            min_c_re = Double.parseDouble(args[1]);
-            min_c_im = Double.parseDouble(args[2]);
-            max_c_re = Double.parseDouble(args[3]);
-            max_c_im = Double.parseDouble(args[4]);
-            max_iter = Integer.parseInt(args[5]);
-            width = Integer.parseInt(args[6]);
-            height = Integer.parseInt(args[7]);
+            min_c_re = Double.parseDouble(args[0]);
+            min_c_im = Double.parseDouble(args[1]);
+            max_c_re = Double.parseDouble(args[2]);
+            max_c_im = Double.parseDouble(args[3]);
+            max_iter = Integer.parseInt(args[4]);
+            width = Integer.parseInt(args[5]);
+            height = Integer.parseInt(args[6]);
         }
         catch (NullPointerException | NumberFormatException ex) {
             System.out.println("Arguments were not entered correctly. Using defaults.");
