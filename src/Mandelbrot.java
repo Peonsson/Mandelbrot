@@ -52,6 +52,7 @@ public class Mandelbrot {
 
         int[][] matrix = new int[width][height];
 
+        // TODO: Move this logic (loop) to the web services server
         // Traverse through each cell (representing a pixel in the final image) in
         // the matrix, calculating if the different coordinates within the boundaries
         // are part of the mandelbrot set or not.
@@ -72,6 +73,7 @@ public class Mandelbrot {
     }
 
 
+    // TODO: Move this logic (method) to the web services server
     /**
      * Find how many iterations are needed to verify if complex number z is in the
      * Mandelbrot set.
