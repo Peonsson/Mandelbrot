@@ -9,9 +9,10 @@ import java.io.File;
     Writes an Image to file of the Mandelbrot set with resolution width and height
     from min_c_re to max_c_re and min_c_im and max_c_im with max iterations max_iter.
 
-    Created 2015-02-19
+    Created 2015-02-19.
 
     Written by Peonsson and roppe546
+
     https://github.com/Peonsson
     https://github.com/roppe546
  */
