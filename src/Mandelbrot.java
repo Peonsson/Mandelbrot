@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  *
  * Writes an Image to file of the Mandelbrot set with resolution width and height
- * from min_c_re to max_c_re and min_c_im and max_c_im with max iterations max_iter.
+ * from min_c_re to max_c_re and min_c_im to max_c_im with max iterations max_iter.
  *
  * Created 2015-02-19.
  *
@@ -24,7 +24,7 @@ public class Mandelbrot {
 
     // Default values for width, height and max_iter in case user inputs
     // bad arguments.
-    private static int width = 512, height = 512, max_iter = 1024;
+    private static int width = 2000, height = 2000, max_iter = 1024;
 
     public static void main(String[] args) {
 
@@ -65,7 +65,7 @@ public class Mandelbrot {
 
                 // Save number of iterations needed. The value returned represents
                 // the color value used in the image.
-                matrix[row][col] = (max_iter - computeIterations(c)) % 256;
+                matrix[row][col] = (max_iter - computeIterations(c));
             }
         }
 
@@ -114,6 +114,12 @@ public class Mandelbrot {
                     int color = matrix[col][row];
 
                     Color newColor = new Color(color);
+
+                    int red = (int) (newColor.getRed() * 0.299);
+                    int green = (int) (newColor.getGreen() * 0.587);
+                    int blue = (int) (newColor.getBlue() * 0.114);
+                    newColor = new Color(red + green + blue, red + green + blue, red + green + blue);
+
                     img.setRGB(row, col, newColor.getRGB());
                 }
             }
