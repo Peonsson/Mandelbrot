@@ -24,7 +24,7 @@ public class Mandelbrot {
 
     // Default values for width, height and max_iter in case user inputs
     // bad arguments.
-    private static int width = 2000, height = 2000, max_iter = 1024;
+    private static int width = 512, height = 512, max_iter = 512;
 
     public static void main(String[] args) {
 
