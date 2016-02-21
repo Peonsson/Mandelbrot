@@ -65,7 +65,7 @@ public class Mandelbrot {
 
                 // Save number of iterations needed. The value returned represents
                 // the color value used in the image.
-                matrix[row][col] = (10000 - computeIterations(c)) % 256;
+                matrix[row][col] = (max_iter - computeIterations(c)) % 256;
             }
         }
 
